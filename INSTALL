@@ -1,0 +1,22 @@
+  SMASH INSTALLATION OVERVIEW
+  ---------------------------
+  To install SMASH, a fortran compiler, BLAS, LAPACK, and MPI
+  (optional) libraries are required.
+  If your machine is not a x86-64/Linux system or does not include
+  an MPI library, choose an appropriate Makefile. Make sure that
+  the compiler and library (F90, LIB, OPT) in the Makefile are
+  correct, and then type the following command to build SMASH.
+
+    (x86-64 with MPI)
+      $ make
+
+    (x86-64 with Intel MPI (mpiifort))
+      $ make -f Makefile.mpiifort
+
+    (x86-64 without MPI)
+      $ make -f Makefile.x86_64.noMPI
+
+    (K Computer or FX10 with MPI)
+      $ make -f Makefile.fujitsu
+
+  If it is successfully completed, you can find the bin/smash file.
