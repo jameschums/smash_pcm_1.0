@@ -283,9 +283,13 @@ end
 !
       use modparallel, only : master
       use modmolecule, only : numatomic, natom, coord
+      use modenergy, only : escf
       use modunit, only : toang
       implicit none
-      integer :: i, j
+      integer :: i, j, jamesflag=0
+      real(8) :: jamese = 0.0D+00
+      logical :: file_exists, exits
+      character(len=9) :: jamesfirst = 'first_run'
       character(len=3) :: table(-9:112)= &
 &     (/'Bq9','Bq8','Bq7','Bq6','Bq5','Bq4','Bq3','Bq2','Bq ','X  ',&
 &       'H  ','He ','Li ','Be ','B  ','C  ','N  ','O  ','F  ','Ne ','Na ','Mg ','Al ','Si ','P  ',&
@@ -297,15 +301,36 @@ end
 &       'Pa ','U  ','Np ','Pu ','Am ','Cm ','Bk ','Cf ','Es ','Fm ','Md ','No ','Lr ','Rf ','Db ',&
 &       'Sg ','Bh ','Hs ','Mt ','Uun','Uuu','Uub'/)
 !
+      inquire(file="molden_opt.xyz", exist=exist)
+      if (exist) then
+          open(22, file="molden_opt.xyz", status="old", position="append", action="write")
+      else
+          open(22, file="molden_opt.xyz", status="new", action="write")
+      endif
+      if (jamesflag >= 1) then
+          write(22, '(I3)')natom
+          write(22, '(f14.7)')escf
+          do i=1,natom
+              write(22,'3x,a3,3x,3f14.7)')table(numatomic(i)),(coord(j,i)*toang,j=1,3)
+          enddo
+      else
+          write(*,'(a9,2x,i3,2x,3f3.6)')jamesfirst,jamesflag,jamese
+      endif
+      close(22)
+      jamesflag = ( jamesflag + 1 )
+! end of james addition to write molden_opt.xyz so can use molden to view optimisation
       if(master) then
         write(*,'(" ----------------------------------------------------")')
         write(*,'("          Molecular Geometry (Angstrom)")')
         write(*,'("  Atom            X             Y             Z")')
-        write(*,'(" ----------------------------------------------------")')
+        write(*,'(" jgeomi----------------------------------------------------")')
+        write(*, '(I3)')natom
+        write(*, '(f14.7)')escf
         do i= 1,natom
           write(*,'(3x,a3,3x,3f14.7)')table(numatomic(i)),(coord(j,i)*toang,j=1,3)
         enddo
-        write(*,'(" ----------------------------------------------------",/)')
+        write(*,'(" jgeomj----------------------------------------------------",/)')
+! added jgeomi and jgeomj so can awk '/jgeomi/,/jgeomj/' the log file
       endif
       return
 end
