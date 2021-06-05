@@ -1,10 +1,10 @@
 #
 #   Makefile for ddCOSMO
 #
-RunF77 = ifort
-FFLAGS = -O3 -xHost -qopenmp
-#RunF77 = gfortran
-#FFLAGS = -O3 -march=native -fopenmp
+#RunF77 = ifort
+#FFLAGS = -O3 -xHost -qopenmp
+RunF77 = gfortran -fallow-argument-mismatch
+FFLAGS = -m64 -fopenmp -lm -llapack -DLINUX -lblas -lopenblas
 #RunF77 = pgfortran
 #FFLAGS = -O3 -mp
 
