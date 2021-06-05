@@ -307,7 +307,7 @@ end
       else
           open(22, file="molden_opt.xyz", status="new", action="write")
       endif
-      if (jamesflag >= 1) then
+      if ((jamesflag >= 1).and.(escf /= 0.)) then
           write(22, '(I3)')natom
           write(22, '(f14.7)')escf
           do i=1,natom
@@ -319,7 +319,7 @@ end
       close(22)
       jamesflag = ( jamesflag + 1 )
 ! end of james addition to write molden_opt.xyz so can use molden to view optimisation
-      if(master) then
+      if((master).and.(escf /= 0.)) then
         write(*,'(" ----------------------------------------------------")')
         write(*,'("          Molecular Geometry (Angstrom)")')
         write(*,'("  Atom            X             Y             Z")')
