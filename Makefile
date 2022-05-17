@@ -1,6 +1,6 @@
-F90 = mpif90
-LIB = -mkl=parallel
-OPT = -openmp -i8 -xHOST
+F90 = nvfortran -DnoMPI -march=core-avx2 #-acc=gpu -Mlarge_arrays -fpic -mcmodel=medium
+LIB = llapack64 -lblas -lopenblas
+OPT = -mp -i8 -O3
 SRC =   basis.F90 geom.F90 guess.F90 fileio.F90 int1.F90 machine.F90 main.F90 math.F90 \
 	memory.F90 scf.F90 scflib.F90 int2.F90 int2elec.F90 int2sp.F90 int2spd1.F90 \
 	int2spd2.F90 int2spd3.F90 int2spd4.F90 gradient.F90 rysquad.F90 \
@@ -27,3 +27,4 @@ $(OBJ): $(addprefix src/,$(MOD))
 
 clean :
 	rm -f $(OBJDIR)/*.mod $(OBJDIR)/*.o bin/smash
+# Nvfortran compiler makes this fly. lenovo ideaPad and AMD cpu with nvidia gpu.. 
