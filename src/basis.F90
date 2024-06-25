@@ -94,6 +94,7 @@
               endif
             enddo
           case('GEN')
+            write(*,'("GEN chosen..yeah so james chose 6-311+G(2d,p) most likely..")')
             call readbasis
             call setgenbasis(ishell)
           case('CHECK')
