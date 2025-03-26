@@ -38,7 +38,7 @@
 &             "            SMASH Version ",a10/,&
 &             "           written by K. ISHIMURA",/,&
 &             "           edited by J. Robinson Nov fed39",/,&
-&             "           Gfortran lapack mpi fedora 41 linux AMD asus rog",/,&
+&             "           nvfortran lapack openmpi fedora 40 linux AMD asus rog",/,&
 &             "----------- JJR SMSH 2.3.0--------",/)') version
       endif
       call tstamp(0)
@@ -92,10 +92,7 @@
           write(*,'(" ============================================================")')
         else
           write(*,'("smash2.3 with ddCOSMO AMD Ryzen 9 7950X3D (32) @ 5.76 GHz")')
-	      write(*,'("smash2.3 NVIDIA GeForce RTX 4060")')
-	      write(*,'("ASUS ROG STRIX B650E-F GAMING WIFI, 128 GiB / 1.14 TiB - btrfs")')
-	      write(*,'("Fuhlsbuttler strasse 711, Hamburg 22336, Deutschland")')
-	      write(*,'("smash2.3 Your calculation finished with",i3," warning(s) nvfotran AMD aus rog fedora41.")')nwarn
+	  write(*,'("smash2.3 Your calculation finished with",i3," warning(s) nvfotran AMD aus rog fedora41.")')nwarn
         endif
       endif
 end program main
