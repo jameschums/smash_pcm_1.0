@@ -14,7 +14,7 @@
       real(8) :: cpu2, wall0, wall1, sec
       character(len=24) :: tdate
 !
-      write(*,'("james tstamp.F90")')
+!      write(*,'("james tstamp.F90")')
       
       if(.not.master) return
       if(indext == 0) then

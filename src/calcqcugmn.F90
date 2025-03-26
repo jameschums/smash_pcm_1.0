@@ -22,7 +22,7 @@
       gmn2(:)= zero
       gmn3(:)= zero
 !
-      write(*,'("james calcqcugmn.F90 smash23 line 25")')
+!      write(*,'("james calcqcugmn.F90 smash23 line 25")')
 !
       ncount= 0
       ncount= ncount+(2*nshell**3+3*nshell**2+nshell)/6+myrank

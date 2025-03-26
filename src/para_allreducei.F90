@@ -11,13 +11,13 @@
       use modparallel, only : checkintsize
       implicit none
       integer(selected_int_kind(9)) :: num4, mpi_comm4, ierr
-      write(*,'("james line 14 use mpi para_allreducei")')
+!      write(*,'("james line 14 use mpi para_allreducei")')
 #else
       use mpi
       use modparallel, only : checkintsize
       implicit none
       integer(selected_int_kind(18)) :: num4, mpi_comm4, ierr
-      write(*,'("james line 20 use mpif.h para_allreducei")')
+!      write(*,'("james line 20 use mpif.h para_allreducei")')
 #endif
       integer,intent(in) :: num, mpi_commin
       integer,intent(in) :: sbuff(*)
@@ -26,7 +26,7 @@
 !
       num4= num
       mpi_comm4= mpi_commin
-      write(*,'("james line 29 use num4 para_allreducei")')
+!      write(*,'("james line 29 use num4 para_allreducei")')
 !
       call checkintsize(isize)
       if(isize == 4) then
@@ -40,7 +40,7 @@
       integer,intent(in) :: sbuff(*)
       integer,intent(out) :: rbuff(*)
       integer ii
-      write(*,'("james line 43 use mpi_commin para_allreducei")')
+!      write(*,'("james line 43 use mpi_commin para_allreducei")')
 !
       do ii= 1,num
         rbuff(ii)= sbuff(ii)

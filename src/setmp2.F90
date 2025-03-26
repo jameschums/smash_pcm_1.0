@@ -9,6 +9,6 @@
       integer :: ncorecalc
 !
       if(ncore == -1) ncore= ncorecalc()
-      write(*,'("james setmp2.F90")')
+!      write(*,'("james setmp2.F90")')
       return
 end

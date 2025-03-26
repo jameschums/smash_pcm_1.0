@@ -22,7 +22,7 @@
       real(8) :: tinv, r1(6), r2(12), r3(10), xx, yy, zz, xy, xz, yz, cint1(3,3,3)
       logical,intent(in) :: iandj
 !
-      write(*,'("james int1gcpp.F90 Calculate Helmann-Feynman gradient term <p|V´|p>")')
+!      write(*,'("james int1gcpp.F90 Calculate Helmann-Feynman gradient term <p|V´|p>")')
 !
       xx= xyz(1)*xyz(1)
       yy= xyz(2)*xyz(2)

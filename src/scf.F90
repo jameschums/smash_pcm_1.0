@@ -2549,7 +2549,7 @@ end
         tmp= tmp-array1(j)*array2(j)
       enddo
       tridot= tmp
-      write(*,'("james scf.f90 line 2552 tridot function Calculate scf energy from Fock and density matrices tmp ",f17.9)') tmp
+      !write(*,'("james scf.f90 line 2552 tridot energy Fock and density matrices tmp ",f17.9)') tmp
       return
 end
 

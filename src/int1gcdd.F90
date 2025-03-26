@@ -28,7 +28,7 @@
       real(8) :: fpc2(6), fpc3(10), fpc4(15), cint1(6,6,3), work(6)
       logical,intent(in) :: iandj
 !
-      write(*,'("james int1gcdd.F90 line 31")')
+!      write(*,'("james int1gcdd.F90 line 31")')
 !
       xx= xyz(1)*xyz(1)
       yy= xyz(2)*xyz(2)

@@ -23,7 +23,7 @@
       enddo
 !$OMP end parallel do
 !
-      write(*,'("james mp2 fixdtor.F90 line 26")')
+!      write(*,'("james mp2 fixdtor.F90 line 26")')
 !
       return
 end

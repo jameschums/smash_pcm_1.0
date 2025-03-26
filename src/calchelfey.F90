@@ -21,7 +21,7 @@
       real(8) :: exij(mxprsh,2), cij(mxprsh,2), coordij(3,2)
       logical :: iandj
 !
-      write(*,'("james calchelfey.F90 Driver of Helmann-Feynman gradient term")')
+!      write(*,'("james calchelfey.F90 Driver of Helmann-Feynman gradient term")')
 !
       iandj=(ish == jsh)
       nangij(1)= mtype(ish)

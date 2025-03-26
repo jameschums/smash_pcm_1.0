@@ -1062,13 +1062,27 @@ end
 ! Execute Mulliken population analysis for closed-shell
 !
       use modparallel, only : master
-      use modmolecule, only : natom, znuc, numatomic
+      use modmolecule, only : natom, znuc, numatomic, coord
       use modbasis, only : locatom, nao, nshell, locbf, mbf
+      use modunit, only : toang
+      use modenergy, only : escf, emp2, escsmp2
       implicit none
-      integer :: ii, jj, ij, ish, iatom, locbfi
+      integer :: ii, jj, ij, ish, iatom, locbfi, i, j
+      logical :: file_exists, exist
       real(8),parameter :: zero=0.0D+00
       real(8),intent(in) :: dmtrx(nao*(nao+1)/2), overlap(nao*(nao+1)/2)
       real(8) :: grossorb(nao), grossatom(natom), totalgross
+!      
+      real(8), parameter :: vdwradii(51) = & 
+    (/ 1.20D0, 1.40D0, 1.82D0, 1.53D0, 1.92D0, 1.70D0, 1.55D0, 1.52D0, &
+       1.47D0, 1.54D0, 2.27D0, 1.73D0, 1.84D0, 2.10D0, 1.80D0, &
+       1.80D0, 1.75D0, 1.88D0, 2.75D0, 2.31D0, 2.11D0, 2.00D0, &
+       2.00D0, 2.00D0, 2.00D0, 2.00D0, 2.00D0, 1.63D0, 1.40D0, &
+       1.39D0, 1.87D0, 2.11D0, 1.85D0, 1.90D0, 1.85D0, 2.02D0, &
+       3.03D0, 2.49D0, 2.00D0, 2.00D0, 2.00D0, 2.00D0, 2.00D0, &
+       2.00D0, 1.63D0, 2.00D0, 2.00D0, 2.00D0, 2.00D0, 2.00D0, &
+       1.98D0 /)
+!       
       character(len=3) :: table(-9:112)= &
 &     (/'Bq9','Bq8','Bq7','Bq6','Bq5','Bq4','Bq3','Bq2','Bq ','X  ',&
 &       'H  ','He ','Li ','Be ','B  ','C  ','N  ','O  ','F  ','Ne ','Na ','Mg ','Al ','Si ','P  ',&
@@ -1083,6 +1097,12 @@ end
       totalgross= zero
       grossorb(:)= zero
       grossatom(:)= zero
+!
+!      do iatom= 1,51
+!        write(*,'("start james ---------- vdw and atoms print -----")
+!	write(*,'(1x,i4,2x,a3,2x,f14.7)')iatom,table(numatomic(iatom)),vdwradii(iatom)
+!	write(*,'("end james ---------- vdw and atoms print -----") 
+!      enddo     
 !
 ! Calculate Gross orbital population
 !
@@ -1113,15 +1133,34 @@ end
       enddo
 !
       if(master) then
+        inquire(file="Input.txt", exist=exist)
+        if (exist) then
+         open(14, file="Input.txt", status="old", position="append", action="write")
+         else
+	 open(14, file="Input.txt", status="new", action="write")
+	endif
+
         write(*,'(" -------------------------------------")')
         write(*,'("      Mulliken Population Analysis")')
-        write(*,'("     Atom     Population     Charge")')
+        write(*,'("     Atom     Population     Charge     vdw")')
         write(*,'(" -------------------------------------")')
         do iatom= 1,natom
-          write(*,'(1x,i4,2x,a3,2f13.6)')iatom,table(numatomic(iatom)), &
-&                                        grossatom(iatom),znuc(iatom)-grossatom(iatom)
-        enddo
-        write(*,'(" -------------------------------------")')
+          write(*,'(3x,i4,3x,a3,2f13.6,3x,f14.7)')iatom,table(numatomic(iatom)), &
+&           grossatom(iatom),znuc(iatom)-grossatom(iatom),vdwradii(numatomic(iatom))
+        enddo	
+	write(*,'(" -------------------------------------")')
+	write(*,'("  COSMO input file")')
+	do iatom= 1,natom
+	   i = iatom
+	  write(14,'(1x,f13.6,2x,3f13.6,2x,f14.7)'),znuc(iatom)-grossatom(iatom), &
+&          (coord(j,i)*toang,j=1,3),vdwradii(numatomic(i))
+          write(*,'(1x,f13.6,2x,3f14.7,2x,f14.7)'),znuc(iatom)-grossatom(iatom), &
+&	  (coord(j,i)*toang,j=1,3),vdwradii(numatomic(i))
+	end do 
+	close(14)	
+	write(*,'("  COSMO END file")')
+	call cosmomain()
+	write(*,'(" -------------------------------------")')
         write(*,'("     Total",13x,f13.6)')totalgross
         write(*,'(" -------------------------------------")')
         write(*,*)

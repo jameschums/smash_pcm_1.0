@@ -17,7 +17,7 @@
 !$OMP end master
 !$OMP end parallel
 !
-      write(*,'("james like i know what the hell this does.. parallelinfo.F90")')
+!      write(*,'("james like i know what the hell this does.. parallelinfo.F90")')
       if(master) then
         istat= hostnm(hostname)
         llen= len_trim(hostname)

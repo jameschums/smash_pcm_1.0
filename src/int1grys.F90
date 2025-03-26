@@ -42,8 +42,8 @@
       ncarti= ncart(nangij(1))
       ncartj= ncart(nangij(2))
 !
-      write(*,'("james Calculate derivative of 1-electron Coulomb integrals (j|Z/r|i) Rys quadratures")')
-      write(*,'("james int1grys.F90 ")')
+!      write(*,'("james Calculate derivative of 1-electron Coulomb integrals (j|Z/r|i) Rys quadratures")')
+!      write(*,'("james int1grys.F90 ")')
 !
       do i= 1,3
         xyz(i)= coordij(i,1)-coordij(i,2)

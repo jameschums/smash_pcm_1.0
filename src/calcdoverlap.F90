@@ -46,9 +46,9 @@
         call iabort
       endif
       
-      write(*,'("james calcdoverlap.F90 Driver of overlap derivative term",/,&
-&               "In : ewdmtrx  (Energy-weighted density matrix) ish, jsh (Shell indices)",/,&
-&               "Inout : egrad (Energy gradient value)",/)')
+!       write(*,'("james calcdoverlap.F90 Driver of overlap derivative term",/,&
+! &               "In : ewdmtrx  (Energy-weighted density matrix) ish, jsh (Shell indices)",/,&
+! &               "Inout : egrad (Energy gradient value)",/)')
 !
       do i= 1,3
         xyzij(i)= coord(i,iatom)-coord(i,jatom)

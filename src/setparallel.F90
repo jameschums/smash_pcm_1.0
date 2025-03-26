@@ -14,7 +14,7 @@
 !
 ! Start MPI parallelization and set mpi_comm1=MPI_COMM_WORLD
 !
-      write(*,'("james - one day I will work out what the hell this does.. mp2 smash")')
+!      write(*,'("james - one day I will work out what the hell this does.. mp2 smash")')
       call para_init(mpi_comm1)
       call para_comm_size(nproc1,mpi_comm1)
       call para_comm_rank(myrank1,mpi_comm1)

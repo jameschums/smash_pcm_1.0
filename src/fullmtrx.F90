@@ -10,7 +10,7 @@
       real(8),intent(in) :: trimat((ndim*(ndim+1))/2)
       real(8),intent(out) :: fullmat(ndim,ndim)
 !
-      write(*,'("james mp2 fullmtrx.F90")')
+!      write(*,'("james mp2 fullmtrx.F90")')
 !
 !$OMP parallel do private(ii)
       do i= 1,ndim
